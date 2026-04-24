@@ -12,7 +12,35 @@ The project is intended to support:
 
 This repository currently contains:
 - initial project-level documentation,
-- BlueSky-specific module scaffold in `/bsky`.
+- BlueSky-specific module scaffold in `/bsky`,
+- a minimal TypeScript/Node.js API skeleton with a health endpoint.
+
+## API skeleton (Phase 1 bootstrap)
+
+The API is intentionally minimal and currently exposes only:
+
+- `GET /health` → service health payload (`status`, `service`, `timestamp`)
+
+No business functions, external service integrations, or persistence wiring are included yet.
+
+### Local development
+
+Requirements:
+- Node.js 20+
+
+Commands:
+
+```bash
+npm install
+npm run dev
+```
+
+Build and run compiled output:
+
+```bash
+npm run build
+npm start
+```
 
 ## Documentation
 
