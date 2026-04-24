@@ -13,15 +13,53 @@ The project is intended to support:
 This repository currently contains:
 - initial project-level documentation,
 - BlueSky-specific module scaffold in `/bsky`,
-- a minimal TypeScript/Node.js API skeleton with a health endpoint.
+- a minimal TypeScript/Node.js API skeleton,
+- a bootstrap scoring module aligned to the Phase 1 MVP API roadmap.
 
-## API skeleton (Phase 1 bootstrap)
+## API (current incremental baseline)
 
-The API is intentionally minimal and currently exposes only:
+### `GET /health`
+Service health payload:
+- `status`
+- `service`
+- `timestamp`
 
-- `GET /health` → service health payload (`status`, `service`, `timestamp`)
+### `POST /v1/score`
+Synchronous scoring endpoint with module-level validation and a deterministic bootstrap heuristic.
 
-No business functions, external service integrations, or persistence wiring are included yet.
+Request body:
+
+```json
+{
+  "content": "text to evaluate",
+  "source": {
+    "platform": "bsky",
+    "contentId": "at://did:plc:example/post/123"
+  }
+}
+```
+
+Response shape:
+
+```json
+{
+  "score": 0.75,
+  "decision": "review",
+  "model": {
+    "id": "heuristic.bootstrap",
+    "version": "0.1.0"
+  },
+  "metadata": {
+    "scoredAt": "2026-04-24T00:00:00.000Z",
+    "source": {
+      "platform": "bsky",
+      "contentId": "at://did:plc:example/post/123"
+    }
+  }
+}
+```
+
+> Note: this is a temporary implementation used to stabilize API contracts and service boundaries before persistence/cache/model-provider integrations.
 
 ### Local development
 
