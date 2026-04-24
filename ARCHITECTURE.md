@@ -9,6 +9,17 @@ Provide a reliable API for NSFW scoring that can be used by moderation tools and
 - **Primary adapter**: BlueSky (`/bsky`)
 - Design all service boundaries so additional platforms can be added without breaking existing API consumers.
 
+## Current implementation snapshot (incremental)
+
+- HTTP module split currently includes:
+  - `health` module (`GET /health`)
+  - `score` module (`POST /v1/score`)
+- `score` module is intentionally service-oriented:
+  - controller handles transport mapping,
+  - validation service owns payload contract checks,
+  - score service owns decision logic.
+- Current scoring logic is a deterministic bootstrap heuristic and not a production ML model integration.
+
 ## Runtime preference
 
 Preferred implementation options:

@@ -2,17 +2,21 @@
 
 ## Phase 0 — Foundation (current)
 
-- Define architecture and operating model.
-- Establish repository documentation and contribution guidance.
-- Clarify BlueSky-first implementation boundaries.
+- ✅ Define architecture and operating model.
+- ✅ Establish repository documentation and contribution guidance.
+- ✅ Clarify BlueSky-first implementation boundaries.
 
-## Phase 1 — MVP Scoring API
+## Phase 1 — MVP Scoring API (in progress)
 
-- Implement `/v1/score` endpoint for synchronous NSFW scoring queries.
-- Add request/response schema validation.
-- Persist scoring requests and results in MySQL 8.
-- Add Redis-backed caching for repeated content hash lookups.
-- Deliver minimal authentication (API key or token-based).
+- ✅ Implement initial `/v1/score` endpoint for synchronous NSFW scoring queries (bootstrap heuristic service).
+- ✅ Add request/response schema validation (module-local validation service).
+- ⏳ Persist scoring requests and results in MySQL 8.
+- ⏳ Add Redis-backed caching for repeated content hash lookups.
+- ⏳ Deliver minimal authentication (API key or token-based).
+
+### Next incremental target
+
+- Add a persistence port + adapter contract for score write/read flows without binding yet to a concrete MySQL implementation.
 
 ## Phase 2 — BlueSky Integration
 
