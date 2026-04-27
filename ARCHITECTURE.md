@@ -17,7 +17,8 @@ Provide a reliable API for NSFW scoring that can be used by moderation tools and
 - `score` module is intentionally service-oriented:
   - controller handles transport mapping,
   - validation service owns payload contract checks,
-  - score service owns decision logic.
+  - score service owns decision logic,
+  - persistence access flows through a dedicated persistence port contract (currently wired to an in-memory adapter).
 - Current scoring logic is a deterministic bootstrap heuristic and not a production ML model integration.
 
 ## Runtime preference

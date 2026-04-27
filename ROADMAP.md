@@ -10,13 +10,13 @@
 
 - ✅ Implement initial `/v1/score` endpoint for synchronous NSFW scoring queries (bootstrap heuristic service).
 - ✅ Add request/response schema validation (module-local validation service).
-- ⏳ Persist scoring requests and results in MySQL 8.
+- ⏳ Persist scoring requests and results in MySQL 8 (port + in-memory adapter contract completed).
 - ⏳ Add Redis-backed caching for repeated content hash lookups.
 - ⏳ Deliver minimal authentication (API key or token-based).
 
 ### Next incremental target
 
-- Add a persistence port + adapter contract for score write/read flows without binding yet to a concrete MySQL implementation.
+- Implement a MySQL-backed adapter for the score persistence port, including schema migration and idempotent upsert semantics.
 
 ## Phase 2 — BlueSky Integration
 
