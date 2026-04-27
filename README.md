@@ -15,6 +15,7 @@ This repository currently contains:
 - BlueSky-specific module scaffold in `/bsky`,
 - a minimal TypeScript/Node.js API skeleton,
 - a bootstrap scoring module aligned to the Phase 1 MVP API roadmap.
+- a score persistence port with an in-memory adapter to preserve write/read service boundaries before MySQL integration.
 
 ## API (current incremental baseline)
 
@@ -59,7 +60,7 @@ Response shape:
 }
 ```
 
-> Note: this is a temporary implementation used to stabilize API contracts and service boundaries before persistence/cache/model-provider integrations.
+> Note: this is a temporary implementation used to stabilize API contracts and service boundaries before concrete MySQL/Redis/model-provider integrations. The score module now uses a persistence port with an in-memory adapter as the contract baseline.
 
 ### Local development
 

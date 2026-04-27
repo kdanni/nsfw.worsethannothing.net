@@ -1,14 +1,24 @@
 import type { ScoreRequest, ScoreResponse } from "./score.types.js";
+import { toContentHash, type ScorePersistencePort } from "./score.persistence.js";
 
 const MODEL_ID = "heuristic.bootstrap";
 const MODEL_VERSION = "0.1.0";
 
 export class ScoreService {
+  constructor(private readonly persistence: ScorePersistencePort) {}
+
   score(request: ScoreRequest): ScoreResponse {
+    const contentHash = toContentHash(request.content);
+    const previousRecord = this.persistence.findLatestByContentHash(contentHash);
+
+    if (previousRecord !== null) {
+      return previousRecord.response;
+    }
+
     // Bootstrap heuristic only: deterministic placeholder until model integrations land.
     const normalizedScore = this.deriveScore(request.content);
 
-    return {
+    const response: ScoreResponse = {
       score: normalizedScore,
       decision: this.toDecision(normalizedScore),
       model: {
@@ -20,6 +30,15 @@ export class ScoreService {
         source: request.source
       }
     };
+
+    this.persistence.save({
+      contentHash,
+      request,
+      response,
+      createdAt: new Date().toISOString()
+    });
+
+    return response;
   }
 
   private deriveScore(content: string): number {
