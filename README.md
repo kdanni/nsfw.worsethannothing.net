@@ -82,6 +82,7 @@ Checks whether a BlueSky/atproto user is known to the catalog.
 
 Requirements:
 - Node.js 20+
+- MySQL client CLI (`mysql`) available in PATH for startup dry-run connection checks
 
 Commands:
 
@@ -89,6 +90,21 @@ Commands:
 npm install
 npm run dev
 ```
+
+
+Optional MySQL dry-run environment variables (used at startup):
+
+```bash
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=
+MYSQL_DATABASE=nsfw_wtn
+MYSQL_CONNECT_TIMEOUT_MS=5000
+MYSQL_DRYRUN_ON_BOOT=true
+```
+
+When `MYSQL_DRYRUN_ON_BOOT=true`, the service runs `SELECT 1;` through the MySQL client before opening the HTTP port.
 
 Build and run compiled output:
 
