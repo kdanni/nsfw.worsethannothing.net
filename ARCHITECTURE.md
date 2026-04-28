@@ -20,6 +20,7 @@ Provide a reliable API for NSFW scoring that can be used by moderation tools and
   - score service owns decision logic,
   - persistence access flows through a dedicated persistence port contract (currently wired to an in-memory adapter).
 - Current scoring logic is a deterministic bootstrap heuristic and not a production ML model integration.
+- BlueSky user catalog module now provides unique atproto DID ↔ handle mappings and append-only handle history records as a foundation for policy and scoring enrichment.
 
 ## Runtime preference
 
@@ -47,6 +48,11 @@ Decision criteria:
 3. **Scoring Orchestrator**
    - Routes content to scoring engine(s).
    - Applies model selection and score normalization rules.
+
+3.5 **User Catalog (BlueSky/atproto)**
+   - Stores canonical unique DID/handle mappings.
+   - Tracks handle change history for identity continuity across moderation and scoring systems.
+   - Provides user-known lookups used by moderation list joins and future scoring features.
 
 4. **Policy Engine**
    - Converts raw score outputs to moderation decisions (allow/review/block/etc.).

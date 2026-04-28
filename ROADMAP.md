@@ -20,6 +20,7 @@
 
 ## Phase 2 — BlueSky Integration
 
+- ✅ Implement baseline BlueSky user catalog repository with DID/handle uniqueness, known-user lookup, and handle change history.
 - Implement BlueSky ingestion adapter in `/bsky`.
 - Normalize BlueSky payloads to internal content model.
 - Enable policy evaluation for BlueSky content contexts.
@@ -28,6 +29,7 @@
 ## Phase 3 — Policy & Moderation Workflows
 
 - Add configurable threshold policies (allow/review/block).
+- Integrate atproto moderation lists and user lists into the scoring process via the BlueSky user catalog.
 - Store policy decisions and moderation events.
 - Add reviewer-friendly retrieval endpoints (history + rationale metadata).
 

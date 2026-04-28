@@ -16,6 +16,7 @@ This repository currently contains:
 - a minimal TypeScript/Node.js API skeleton,
 - a bootstrap scoring module aligned to the Phase 1 MVP API roadmap.
 - a score persistence port with an in-memory adapter to preserve write/read service boundaries before MySQL integration.
+- an in-memory atproto user catalog module for DID/handle mapping and handle history tracking.
 
 ## API (current incremental baseline)
 
@@ -62,7 +63,22 @@ Response shape:
 
 > Note: this is a temporary implementation used to stabilize API contracts and service boundaries before concrete MySQL/Redis/model-provider integrations. The score module now uses a persistence port with an in-memory adapter as the contract baseline.
 
-### Local development
+### `PUT /v1/bsky/users`
+Upsert an atproto user catalog entry with unique DID/handle mapping and automatic handle change history tracking.
+
+Request body:
+
+```json
+{
+  "did": "did:plc:aliceexample",
+  "handle": "alice.bsky.social"
+}
+```
+
+### `GET /v1/bsky/users/known?did=...` or `?handle=...`
+Checks whether a BlueSky/atproto user is known to the catalog.
+
+## Local development
 
 Requirements:
 - Node.js 20+
